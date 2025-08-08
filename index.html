@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Cô Nhung Cute - Sáng tạo cùng AI</title>
+    <!-- Font Awesome CDN (brands) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+        referrerpolicy="no-referrer" />
+
+    <!-- Logo/Favicon -->
+    <link rel="icon" type="image/png" href="https://conhungcute.com/wp-content/uploads/2025/08/Logo-tach-nen.png">
+
+
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0
+        }
+
+        body {
+            font-family: system-ui, -apple-system, 'Segoe UI', Roboto, Ubuntu, 'Helvetica Neue', sans-serif;
+            color: #333;
+            position: relative;
+            overflow-x: hidden
+        }
+
+        /* Nền gradient + bong bóng */
+        #bubbles {
+            position: fixed;
+            inset: 0;
+            z-index: -1;
+            background: linear-gradient(-45deg, #ff9a9e, #fad0c4, #fbc2eb, #a6c1ee);
+            background-size: 400% 400%;
+            animation: gradientBG 18s ease infinite
+        }
+
+        @keyframes gradientBG {
+            0% {
+                background-position: 0% 50%
+            }
+
+            50% {
+                background-position: 100% 50%
+            }
+
+            100% {
+                background-position: 0% 50%
+            }
+        }
+
+        .hero {
+            padding: 56px 20px 28px;
+            text-align: center;
+            color: #fff
+        }
+
+        .hero h1 {
+            font-size: clamp(26px, 4vw, 40px);
+            margin-bottom: 8px;
+            letter-spacing: .2px
+        }
+
+        .hero p {
+            opacity: .95
+        }
+
+        .btn {
+            background: #e67e22;
+            color: #fff;
+            padding: 12px 20px;
+            border-radius: 10px;
+            text-decoration: none;
+            font-weight: 700;
+            display: inline-block;
+            margin-top: 16px;
+            box-shadow: 0 6px 18px rgba(0, 0, 0, .12);
+            transition: .25s
+        }
+
+        .btn:hover {
+            transform: translateY(-1px);
+            background: #d35400
+        }
+
+        .section {
+            max-width: 1100px;
+            margin: 28px auto;
+            padding: 0 18px
+        }
+
+        /* Slider ảnh nguyên bản */
+        .slider {
+            position: relative;
+            width: 100%;
+            overflow: hidden;
+            border-radius: 18px;
+            box-shadow: 0 12px 40px rgba(0, 0, 0, .15);
+        }
+
+        .slides {
+            display: flex;
+            align-items: center;
+            transition: transform .7s ease-in-out;
+        }
+
+        .slide {
+            flex: 0 0 100%;
+            text-align: center;
+        }
+
+        .slide img {
+            max-width: 100%;
+            height: auto;
+            display: inline-block;
+        }
+
+        .dots {
+            position: absolute;
+            left: 0;
+            right: 0;
+            bottom: 10px;
+            display: flex;
+            gap: 8px;
+            justify-content: center;
+        }
+
+        .dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, .55);
+        }
+
+        .dot.active {
+            background: #fff;
+        }
+
+        /* Ticker */
+        .ticker {
+            margin-top: 18px;
+            border-radius: 12px;
+            overflow: hidden;
+            background: rgba(255, 255, 255, .65);
+            backdrop-filter: blur(6px);
+            border: 1px solid rgba(255, 255, 255, .5)
+        }
+
+        .ticker__track {
+            display: flex;
+            gap: 32px;
+            white-space: nowrap;
+            padding: 10px 0;
+            animation: tickerMove 25s linear infinite
+        }
+
+        .tag {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 14px;
+            border-radius: 999px;
+            background: #fff;
+            box-shadow: 0 4px 14px rgba(0, 0, 0, .08);
+            font-weight: 600
+        }
+
+        @keyframes tickerMove {
+            0% {
+                transform: translateX(0)
+            }
+
+            100% {
+                transform: translateX(-50%)
+            }
+        }
+
+        .video-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 18px
+        }
+
+        iframe {
+            width: 100%;
+            aspect-ratio: 16/9;
+            border-radius: 12px;
+            border: 0;
+            box-shadow: 0 8px 26px rgba(0, 0, 0, .12)
+        }
+
+        .footer {
+            background: rgba(44, 62, 80, .9);
+            color: #fff;
+            text-align: center;
+            padding: 26px 18px;
+            margin-top: 34px
+        }
+
+        .social-row{
+            display:flex;justify-content:center;gap:18px;align-items:center;
+            margin-top:18px;flex-wrap:wrap
+        }
+        .icon{
+            width:52px;height:52px;border-radius:50%;
+            display:inline-flex;align-items:center;justify-content:center;
+            color:#fff;text-decoration:none;box-shadow:0 8px 18px rgba(0,0,0,.12);
+            transition:transform .2s ease, box-shadow .2s ease, filter .2s ease;
+        }
+        .icon:hover{transform:translateY(-2px);box-shadow:0 12px 26px rgba(0,0,0,.18);filter:brightness(1.05)}
+
+        .icon.fb{background:#1877F2}
+        .icon.yt{background:#FF0000}
+        .icon.tiktok{background:#000}
+        .icon.zalo{
+            background:#0068FF; font-weight:800; font-family:system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+            letter-spacing:0.5px;
+        }
+        .icon i{font-size:22px}
+        .icon.zalo span{font-size:20px;line-height:1}
+        /* Nhãn nhỏ dưới icon (tuỳ chọn) */
+        .social-wrap{display:flex;flex-direction:column;align-items:center;gap:6px}
+        .label{font-size:12px;font-weight:600;color:#2c3e50;background:rgba(255,255,255,.8);
+                padding:3px 8px;border-radius:8px}
+    </style>
+</head>
+
+<body>
+    <canvas id="bubbles"></canvas>
+
+    <header class="hero">
+        <h1>🌟 Khám phá Sáng Tạo cùng Cô Nhung Cute</h1>
+        <p>Khóa học AI • Sách học liệu • E-learning • Video hướng dẫn</p>
+        <a class="btn" href="https://conhungcute.com/khoa-hoc/dang-ki/" target="_blank">🚀 Đăng ký học ngay</a>
+    </header>
+
+    <main class="section">
+        <!-- SLIDER -->
+        <div class="slider" id="slider">
+            <div class="slides" id="slides">
+                <div class="slide"><img src="https://conhungcute.com/wp-content/uploads/2025/07/001.png" alt="Ảnh 1"></div>
+                <div class="slide"><img src="https://conhungcute.com/wp-content/uploads/2025/07/002.png" alt="Ảnh 2"></div>
+                <div class="slide"><img src="https://conhungcute.com/wp-content/uploads/2025/07/003.png" alt="Ảnh 3"></div>
+                <div class="slide"><img src="https://conhungcute.com/wp-content/uploads/2025/07/004.png" alt="Ảnh 4"></div>
+                <div class="slide"><img src="https://conhungcute.com/wp-content/uploads/2025/07/005.png" alt="Ảnh 5"></div>
+                <div class="slide"><img src="https://conhungcute.com/wp-content/uploads/2025/07/006.png" alt="Ảnh 6"></div>
+            </div>
+            <div class="dots" id="dots"></div>
+        </div>
+
+
+        <!-- TICKER -->
+        <div class="ticker" aria-hidden="true">
+            <div class="ticker__track">
+                <span class="tag">🎬 Làm phim AI</span>
+                <span class="tag">📘 Sách Vật lí in màu</span>
+                <span class="tag">🧪 STEM – E-learning</span>
+                <span class="tag">✨ Bài giảng sinh động</span>
+                <span class="tag">📥 Tài liệu Demo</span>
+                <span class="tag">💡 Sáng kiến kinh nghiệm</span>
+                <span class="tag">🎬 Làm phim AI</span>
+                <span class="tag">📘 Sách Vật lí in màu</span>
+                <span class="tag">🧪 STEM – E-learning</span>
+                <span class="tag">✨ Bài giảng sinh động</span>
+                <span class="tag">📥 Tài liệu Demo</span>
+                <span class="tag">💡 Sáng kiến kinh nghiệm</span>
+            </div>
+        </div>
+
+        <!-- VIDEOS -->
+        <section class="section" style="padding:0">
+            <h2 style="margin:14px 0 12px">🎬 Video Demo Khóa Học</h2>
+            <div class="video-grid">
+                <iframe src="https://www.youtube.com/embed/HC85NeGyBXM" allowfullscreen></iframe>
+                <iframe src="https://www.youtube.com/embed/4nWpJ4GEP2Q" allowfullscreen></iframe>
+                <iframe src="https://www.youtube.com/embed/UPDtQB3HVDM" allowfullscreen></iframe>
+                <iframe src="https://www.youtube.com/embed/PXAr4C_uL-g" allowfullscreen></iframe>
+            </div>
+        </section>
+
+        <!-- PRODUCTS -->
+        <section class="section" style="padding-top:10px">
+            <h2>📘 Sản phẩm nổi bật</h2>
+            <ul style="margin-top:8px;line-height:1.9">
+                <li>✅ Sách học Vật lí THPT – in màu đẹp</li>
+                <li>✅ Video bài giảng chuyên sâu</li>
+                <li>✅ Bài giảng STEM – E-learning – Sáng kiến</li>
+            </ul>
+
+            <!-- Mạng xã hội (không dùng ảnh, không lo lỗi) -->
+            <div class="social-row" aria-label="Liên kết mạng xã hội">
+                <a class="icon fb" href="https://www.facebook.com/nguyen.nhung.716" target="_blank" rel="noopener" title="Facebook">
+                    <i class="fa-brands fa-facebook-f"></i>
+                </a>
+            
+                <a class="icon zalo" href="https://zalo.me/84972464852" target="_blank" rel="noopener" title="Zalo"
+                    aria-label="Zalo">
+                    <span>Z</span>
+                </a>
+            
+                <a class="icon yt" href="https://www.youtube.com/@conhungcute151" target="_blank" rel="noopener" title="YouTube">
+                    <i class="fa-brands fa-youtube"></i>
+                </a>
+            
+                <a class="icon tiktok" href="https://www.tiktok.com/@conhung.cute?_t=ZS-8xIRCEj4kzY&_r=1" target="_blank"
+                    rel="noopener" title="TikTok">
+                    <i class="fa-brands fa-tiktok"></i>
+                </a>
+            </div>
+
+
+            <div style="text-align:center;margin-top:14px">
+                <a class="btn" href="https://conhungcute.com" target="_blank">Trang chính Cô Nhung Cute.com</a>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">© 2025 Cô Nhung Cute – Sáng tạo với Công nghệ và Giáo dục.</footer>
+
+    <!-- Bubbles + Slider -->
+    <script>
+        /* Bubbles */
+        const cvs = document.getElementById('bubbles'), ctx = cvs.getContext('2d'); let W, H, arr = [];
+        function size() { W = cvs.width = innerWidth; H = cvs.height = innerHeight }
+        function reset() { arr.length = 0; for (let i = 0; i < 42; i++) { arr.push({ x: Math.random() * W, y: Math.random() * H, r: 5 + Math.random() * 10, s: .4 + Math.random() * 1.1, o: .3 + Math.random() * .4 }) } }
+        function loop() { ctx.clearRect(0, 0, W, H); arr.forEach(b => { ctx.beginPath(); ctx.arc(b.x, b.y, b.r, 0, Math.PI * 2); ctx.fillStyle = `rgba(255,255,255,${b.o})`; ctx.fill(); b.y -= b.s; if (b.y < -b.r) { b.y = H + b.r; b.x = Math.random() * W } }); requestAnimationFrame(loop) }
+        addEventListener('resize', () => { size(); reset() }); size(); reset(); loop();
+
+        /* Slider */
+        const slides = document.getElementById('slides');
+        const slidesCount = [...slides.children].length;
+        const dotsC = document.getElementById('dots');
+        let idx = 0, timer = null;
+        for (let i = 0; i < slidesCount; i++) {
+            const d = document.createElement('div'); d.className = 'dot' + (i === 0 ? ' active' : '');
+            d.addEventListener('click', () => go(i));
+            dotsC.appendChild(d);
+        }
+        function mark() { [...dotsC.children].forEach((d, i) => d.classList.toggle('active', i === idx)) }
+        function go(i) { idx = (i + slidesCount) % slidesCount; slides.style.transform = `translateX(${-idx * 100}%)`; mark(); restart() }
+        function next() { go(idx + 1) }
+        function restart() { clearInterval(timer); timer = setInterval(next, 4500) }
+        restart();
+    </script>
+</body>
+
+</html>
